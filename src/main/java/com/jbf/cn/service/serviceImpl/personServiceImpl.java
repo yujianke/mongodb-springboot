@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class personServiceImpl implements IpersonService {
@@ -27,7 +29,12 @@ public class personServiceImpl implements IpersonService {
     }
     @Override
     public Person findById(String id) {
-        return personDao.findById(id).get();
+        Optional<Person> optional = personDao.findById(id);
+        Person person=null;
+        if(optional != null && optional.isPresent()) {
+             person = optional.get();
+        }
+        return person;
     }
     @Override
     public void save(Person person) {
