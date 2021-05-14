@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://yjk:yjk123456@192.168.44.131:27017/?authSource=admin #认证数据库 必须写
+      database: app

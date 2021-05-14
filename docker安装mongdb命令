@@ -1,0 +1,13 @@
+docker pull mongo
+docker run --name mongodb -p 27017:27017 -d mongo --auth
+docker exec -it 51a5b5e05fe4 mongo admin
+db.createUser({ user: 'root', pwd: 'root', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+exit
+docker exec -it 51a5b5e05fe4 mongo admin
+db.auth("root","root");
+db.createUser({ user: 'yjk', pwd: 'yjk123456', roles: [ { role: "readWrite", db: "app" } ] });
+exit
+docker exec -it 51a5b5e05fe4  mongo admin
+db.auth("yjk","yjk123456");
+use app
+db.test.save({name:"zhangsan"});
